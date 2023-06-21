@@ -10,35 +10,49 @@
         <ResourceDictionary>
             <DataTemplate x:Key="carViewTemplate">
                 <ViewCell>
-                    <ViewCell.ContextActions>
-                        <MenuItem Text="Delete" 
-                                  Command="{Binding Source={x:Reference listViewPage}, Path=BindingContext.DeleteCommand}" 
-                                  CommandParameter="{Binding .}" 
-                                  IsDestructive="True" />
-                    </ViewCell.ContextActions>
-                    <local:CarView Padding="0,10,0,0" />
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem
+                                    Text="Delete"
+                                    Command="{Binding Source={x:Reference listViewPage}, Path=BindingContext.DeleteCommand}" 
+                                    CommandParameter="{Binding .}"
+                                    BackgroundColor="Red" />
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+                        <SwipeView.Content>
+                            <local:CarView Padding="0,10,0,0" />
+                        </SwipeView.Content>
+                    </SwipeView>
                 </ViewCell>
             </DataTemplate>
             <DataTemplate x:Key="nonCarViewTemplate">
                 <ViewCell>
-                    <ViewCell.ContextActions>
-                        <MenuItem Text="Delete" 
-                                  Command="{Binding Source={x:Reference listViewPage}, Path=BindingContext.DeleteCommand}" 
-                                  CommandParameter="{Binding .}" 
-                                  IsDestructive="True" />
-                    </ViewCell.ContextActions>
-                    <Frame Margin="5,15,5,5"
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem
+                                    Text="Delete"
+                                    Command="{Binding Source={x:Reference listViewPage}, Path=BindingContext.DeleteCommand}" 
+                                    CommandParameter="{Binding .}"
+                                    BackgroundColor="Red" />
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+                        <SwipeView.Content>
+                            <Frame Margin="5,15,5,5"
 			                   BorderColor="LightGray"
 			                   CornerRadius="5"
 			                   HasShadow="False">
-                        <Label Text="{Binding Description}" FontFamily="{StaticResource NormalFont}"/>
-                        <Frame.Background>
-                            <LinearGradientBrush EndPoint="1,0">
-                                <GradientStop Color="Yellow" Offset="0.1" />
-                                <GradientStop Color="Green" Offset="1.0" />
-                            </LinearGradientBrush>
-                        </Frame.Background>
-                    </Frame>
+                                <Label Text="{Binding Description}" FontFamily="{StaticResource NormalFont}"/>
+                                <Frame.Background>
+                                    <LinearGradientBrush EndPoint="1,0">
+                                        <GradientStop Color="Yellow" Offset="0.1" />
+                                        <GradientStop Color="Green" Offset="1.0" />
+                                    </LinearGradientBrush>
+                                </Frame.Background>
+                            </Frame>
+                        </SwipeView.Content>
+                    </SwipeView>
                 </ViewCell>
             </DataTemplate>
             <dataSelector:CarDataTemplateSelector x:Key="carTemplateDataSelector"
