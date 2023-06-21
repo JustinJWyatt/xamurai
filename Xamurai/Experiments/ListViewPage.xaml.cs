@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamurai.Services;
 
 namespace Xamurai
 {
@@ -17,5 +18,11 @@ namespace Xamurai
 			BindingContext = new SampleViewModel();
 			InitializeComponent ();
 		}
-	}
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+			DependencyService.Get<IStatusBarService>().HideStatusBar();
+		}
+    }
 }
