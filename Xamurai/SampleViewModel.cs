@@ -1,6 +1,7 @@
 ﻿using Prism.Mvvm;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using Xamarin.Forms;
 
@@ -54,6 +55,11 @@ namespace Xamurai
 			get { return _cars; }
 			set { SetProperty(ref _cars, value); }
 		}
+
+		public Command DeleteCommand => new Command<Car>((car) =>
+		{
+			this.Cars.Remove(car);
+		});
 
 	}
 }

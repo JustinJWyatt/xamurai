@@ -6,28 +6,29 @@ using System.ComponentModel;
 
 namespace Xamurai
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class CarView : ContentView, INotifyPropertyChanged
-	{
-		public CarView ()
-		{
-			IsExpanded = true;
-			ToggleCollapseCommand = new DelegateCommand(ToggleCollapse);
-			InitializeComponent ();
-		}
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class CarView : ContentView, INotifyPropertyChanged
+    {
+        public CarView()
+        {
+            IsExpanded = true;
+            ToggleCollapseCommand = new DelegateCommand(ToggleCollapse);
+            InitializeComponent();
+        }
 
-		private void ToggleCollapse()
-		{
-			//if (DeviceInfo.Platform == DevicePlatform.Android)
-			//{
-				//BUG iOS pre7+: doesn't collapse the section, only makes the label invisible
-				IsExpanded = !IsExpanded;
-				OnPropertyChanged(nameof(IsExpanded));
-			//}
-		}
+        private async void ToggleCollapse()
+        {
+            //if (DeviceInfo.Platform == DevicePlatform.Android)
+            //{
+                //BUG iOS pre7+: doesn't collapse the section, only makes the label invisible
+                await this.carViewFrameGrid.FadeTo((IsExpanded ? 0 : 1), 250);
+                IsExpanded = !IsExpanded;
+                OnPropertyChanged(nameof(IsExpanded));
+            //}
+        }
 
-		public ICommand ToggleCollapseCommand { get; }
+        public ICommand ToggleCollapseCommand { get; }
 
-		public bool IsExpanded { get; set; }
-	}
+        public bool IsExpanded { get; set; }
+    }
 }

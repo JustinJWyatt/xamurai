@@ -6,7 +6,7 @@
              x:Name="_carView"
              BackgroundColor="White">
 	<ContentView.Content>
-		<Grid>
+        <Grid>
 			<Frame Margin="5,15,5,5"
 			       BorderColor="LightGray"
 			       CornerRadius="5"
@@ -15,7 +15,7 @@
 					<Grid.RowDefinitions>
 						<RowDefinition Height="Auto" />
 					</Grid.RowDefinitions>
-					<Grid IsVisible="{Binding IsExpanded, Source={x:Reference _carView}}">
+                    <Grid x:Name="carViewFrameGrid" IsVisible="{Binding IsExpanded, Source={x:Reference _carView}}">
 						<Grid.RowDefinitions>
 							<RowDefinition Height="Auto" />
 							<RowDefinition Height="*" />
@@ -43,8 +43,6 @@
 				       Text="{Binding Name}"
 				       VerticalTextAlignment="Center" />
 			</StackLayout>
-
-
 		</Grid>
 	</ContentView.Content>
 </ContentView>

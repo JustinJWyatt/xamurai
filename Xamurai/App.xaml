@@ -3,5 +3,13 @@
 	x:Class="Xamurai.App"
 	xmlns="http://xamarin.com/schemas/2014/forms"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-	<Application.Resources />
+    <Application.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:TypeArguments="x:String" x:Key="NormalFont">
+                <On Platform="Android" Value="OpenSans-Regular.ttf#Open Sans" />
+                <On Platform="UWP" Value="/Assets/OpenSans-Regular.ttf#Open Sans" />
+                <On Platform="iOS" Value="OpenSans-Regular" />
+            </OnPlatform>
+        </ResourceDictionary>
+    </Application.Resources>
 </Application>

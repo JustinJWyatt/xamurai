@@ -3,27 +3,60 @@
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Xamurai"
+             xmlns:dataSelector="clr-namespace:Xamurai.DataTemplateSelectors" 
+             x:Name="listViewPage"
              Title="List View">
-	<ContentPage.Content>
-
-		<Grid>
-			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto" />
-				<RowDefinition Height="*" />
-			</Grid.RowDefinitions>
-			<ListView Grid.Row="1"
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="carViewTemplate">
+                <ViewCell>
+                    <ViewCell.ContextActions>
+                        <MenuItem Text="Delete" 
+                                  Command="{Binding Source={x:Reference listViewPage}, Path=BindingContext.DeleteCommand}" 
+                                  CommandParameter="{Binding .}" 
+                                  IsDestructive="True" />
+                    </ViewCell.ContextActions>
+                    <local:CarView Padding="0,10,0,0" />
+                </ViewCell>
+            </DataTemplate>
+            <DataTemplate x:Key="nonCarViewTemplate">
+                <ViewCell>
+                    <ViewCell.ContextActions>
+                        <MenuItem Text="Delete" 
+                                  Command="{Binding Source={x:Reference listViewPage}, Path=BindingContext.DeleteCommand}" 
+                                  CommandParameter="{Binding .}" 
+                                  IsDestructive="True" />
+                    </ViewCell.ContextActions>
+                    <Frame Margin="5,15,5,5"
+			                   BorderColor="LightGray"
+			                   CornerRadius="5"
+			                   HasShadow="False">
+                        <Label Text="{Binding Description}" FontFamily="{StaticResource NormalFont}"/>
+                        <Frame.Background>
+                            <LinearGradientBrush EndPoint="1,0">
+                                <GradientStop Color="Yellow" Offset="0.1" />
+                                <GradientStop Color="Green" Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Frame.Background>
+                    </Frame>
+                </ViewCell>
+            </DataTemplate>
+            <dataSelector:CarDataTemplateSelector x:Key="carTemplateDataSelector"
+                CarView="{StaticResource carViewTemplate}"
+                NonCarView="{StaticResource nonCarViewTemplate}" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <ListView Grid.Row="1"
 			          HasUnevenRows="True"
 			          ItemsSource="{Binding Cars}"
-			          SelectionMode="None"
-			          SeparatorVisibility="None">
-				<ListView.ItemTemplate>
-					<DataTemplate>
-						<ViewCell>
-							<local:CarView Padding="0,10,0,0" />
-						</ViewCell>
-					</DataTemplate>
-				</ListView.ItemTemplate>
-			</ListView>
-		</Grid>
-	</ContentPage.Content>
+			          SeparatorVisibility="None"
+                      ItemTemplate="{StaticResource carTemplateDataSelector}"/>
+        </Grid>
+    </ContentPage.Content>
 </ContentPage>
