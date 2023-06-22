@@ -4,6 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Xamurai"
              xmlns:dataSelector="clr-namespace:Xamurai.DataTemplateSelectors" 
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              x:Name="listViewPage"
              Title="List View">
     <ContentPage.Resources>
@@ -21,7 +22,7 @@
                             </SwipeItems>
                         </SwipeView.RightItems>
                         <SwipeView.Content>
-                            <local:CarView Padding="0,10,0,0" />
+                            <local:CarView Padding="0,10,0,0" xct:TouchEffect.LongPressCommand="{Binding Source={x:Reference listViewPage}, Path=BindingContext.OnLongPressCommand}" xct:TouchEffect.LongPressCommandParameter="{Binding .}" />
                         </SwipeView.Content>
                     </SwipeView>
                 </ViewCell>
@@ -42,7 +43,8 @@
                             <Frame Margin="5,15,5,5"
 			                   BorderColor="LightGray"
 			                   CornerRadius="5"
-			                   HasShadow="False">
+			                   HasShadow="False"
+                               xct:TouchEffect.LongPressCommand="{Binding Source={x:Reference listViewPage}, Path=BindingContext.OnLongPressCommand}" xct:TouchEffect.LongPressCommandParameter="{Binding .}">
                                 <Label Text="{Binding Description}" FontFamily="{StaticResource NormalFont}"/>
                                 <Frame.Background>
                                     <LinearGradientBrush EndPoint="1,0">
